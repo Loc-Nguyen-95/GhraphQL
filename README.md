@@ -10,7 +10,7 @@ Trong bài viết này bạn sẽ được biết về GraphQL types: `5 built-i
 ## Prerequisites - ĐK tiên quyết 
 - Hiểu cơ bản về GraphQL
 - [Set up 1 GraphQL API server in NodeJs](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-graphql-api-server-in-node-js)
-## Scalar Types (Vô hướng)
+## 1. Scalar Types (Vô hướng)
 GraphQL schema cuối cùng để giải quyết nhiều loại scalar types (Primative value)
 
 GraphQL response có là đại diện cho 1 cái cây, và scalar types như những cái lá cuối cùng của cây (last level always resolve scalar (or enum) type
@@ -23,7 +23,7 @@ VD
 ```swift
   scalar Date
 ```
-## Enum Type 
+## 2. Enum Type 
 Mô tả 1 set của possitive values
 VD
 ```swift
@@ -63,7 +63,7 @@ type Query {
 }
 ```
 SINGLE (default)
-## Non-Nulll Type
+## 3. Non-Nulll Type
 Nên chú ý rằng `null` hay `undefined` - được coi là Primitive, nhưng lại không có trong built-in scalar. Không tồn tại trong GraphQL
 
 Tất cả những type trong GraphQL đều có thể là null (by default) và vì thế null là 1 phản hồi có giá trị cho mọi type
@@ -73,10 +73,10 @@ Tất cả những type trong GraphQL đều có thể là null (by default) và
 Non-null định nghĩa 1 type sửa đổi, được sử dụng để sửa đổi 1 loại đang được đề cặp đến
 VD 
 `string` có thể là tuỳ chọn (hoặc null) , còn `string!` thì được yêu cầu (non-null)
-## List Type 
+## 3. List Type 
 List type là một loại khác của type modifier, mọi loại (type) được bao bởi dấu ngoặc vuông "[]" đều có thể trở thành List type - là 1 collection định nghĩa type của mỗi item trong danh sách
 VD, type được định nghĩa [Int] sẽ là 1 collection của Int type, và [String] sẽ là collection của String type. Non-null và List có thể được dùng cùng với nhau để tạo nên 1 laoij dùng cả trong yêu cầu và định nghĩa, VD [String]!
-## Object Type 
+## 4. Object Type 
 Nếu như GraphQL scalar type mô tả "lá" của cấu trúc GraphQL response, Object type mô tả "nhánh", hầu hết các schema đều là Object 
 
 Objects bao gồm danh sách các field (key) được đặt tên và value được xử lí 
@@ -122,7 +122,7 @@ type Fighter {
 ```
 Object có thể được lồng trong 1 field của Object khác 
 
-## Root Operation Types 
+## 5. Root Operation Types 
 Có 3 loại Object đặc biệt trong GraphQL schema : Query, Mutation, Subscription (được biết như Root Operator type) và tuân thủ mọi rules như những Object type khác
 
 Từ khoá schema đại diện cho điểm truy cập vào GraphQL schema. Your root Query, Mutation, Subcription sẽ nằm trong root schema Object
@@ -153,7 +153,7 @@ type Subscription {
   randomBattle(enemy: Enemy): BattleResult
 }
 ```
-## Field Arguments 
+## 6. Field Arguments 
 Field của GraphQL Object là 1 function thiết yếu trả về giá trị, có thể chấp nhận đối số là những function. Field argument thì được định nghĩa bởi tên của type. Argument có thể là non-object type. trong VD sau Fighter Object có thể được lọc bởi trường id (resolve to a Non-null ID type)
 ```swift
 type Query {
@@ -162,7 +162,7 @@ type Query {
 ```
 Được dùng để fetch single item từ data store, nhưng argument có thể dùng cho filtering, phân trang, và những truy vấn đặc biệt khác 
 
-## Interface Type
+## 7. Interface Type
 Giống như Object type, Interface type bao gồm list tên và value type tương ứng, gần giống như object nhưng là tập con của object
 
 Như VD chúng ta có Fighter Object nhưng chúng ta cũng muốn tạo những object khác như Wizard, Healer có chung 1 vài trường nhưng cũng có những điểm khác. Trong trường hợp này bạn có thể sử dụng Interface để định nghĩa trường chung, và tạo 1 object là triển khai cuả Interface 
@@ -202,7 +202,7 @@ type Wizard implements BaseCharacter {
 ```
 Fighter và Wizard đều là những triển khai có giá trị của BaseCharacter interface bởi vì nó có những tập con bắt buộc 
 
-## Union Type
+## 8. Union Type
 Một loại trích xuất khác được sử dụng với Object là Union type. Sử dụng từ khoá `union` bạn có thể định nghĩa type với list của Object
 
 Sử dụng interface được tạo ra ở phần trước, bạn cũng có thể tạo Character Union để định nghĩa character như Wizard hay Fighter 
