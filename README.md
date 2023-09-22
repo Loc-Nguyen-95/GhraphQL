@@ -1,4 +1,4 @@
-# GraphQL
+# GraphQL `Type System`
 #### Giới thiệu
 
 GraphQl là 1 diều kiện tốt để giao tiếp giữa FE và BE 
