@@ -13,12 +13,17 @@ Trong bài viết này bạn sẽ được biết về GraphQL types: `5 built-i
 ## 1. Scalar Types (Vô hướng)
 GraphQL schema cuối cùng để giải quyết nhiều loại scalar types (Primative value)
 
-GraphQL response có là đại diện cho 1 cái cây, và scalar types như những cái lá cuối cùng của cây (last level always resolve scalar (or enum) type
+GraphQL response là đại diện cho 1 cái cây, và scalar types như những cái lá cuối cùng của cây (last level always resolve scalar (or enum) type
 
-5 built-in scalar types : Int, Float, String, Boolean và ID 
+5 built-in scalar types : 
+- Int
+- Float
+- String
+- Boolean
+- ID 
 
 #### Custom scalars 
-Bạn có thể sử dụng custom scalar để tạo types - cho server-level validation (Date, Time, Url) 
+Bạn có thể sử dụng custom scalar để tạo types - cho Server-level validation (Date, Time, Url) 
 VD 
 ```swift
   scalar Date
@@ -40,7 +45,7 @@ enum Species {
   DWARF
 }
 ```
-Bằng cách này có thể đảm bảo Job là FIGHTER hay WIZARD, nó sẽ không thể nếu như bạn dùng String type thay vì tạo 1 custom Enum (được viết hoa toàn bộ)
+Bằng cách này có thể đảm bảo Job là FIGHTER hay WIZARD, nó sẽ không thể nếu như bạn dùng String type mà nên tạo 1 custom Enum (được viết hoa toàn bộ)
 
 Enums cũng có thể được sử dụng như 1 giá trị của 1 arguments (VD trong 1 object)
 
@@ -58,32 +63,37 @@ type Weapon {
   hand: Hand
 }
 
+// Query 
 type Query {
   weapons(hand: Hand = SINGLE): [Weapon]
 }
 ```
 SINGLE (default)
 ## 3. Non-Nulll Type
-Nên chú ý rằng `null` hay `undefined` - được coi là Primitive, nhưng lại không có trong built-in scalar. Không tồn tại trong GraphQL
+Nên chú ý rằng `null` hay `undefined` - được coi là Primitive, nhưng lại không có trong built-in scalar. **Không tồn tại** trong GraphQL
 
 Tất cả những type trong GraphQL đều có thể là null (by default) và vì thế null là 1 phản hồi có giá trị cho mọi type
 
-Để tạo nên 1 yêu cầu về giá trị, nó phải được chuyển sang GraphQL Non-Null Type với dấu chấm than ở cuối 
+Để tạo nên 1 yêu cầu về giá trị, nó phải được **chuyển sang GraphQL Non-Null Type** với dấu chấm than ở cuối 
 
-Non-null định nghĩa 1 type sửa đổi, được sử dụng để sửa đổi 1 loại đang được đề cặp đến
+Non-null định nghĩa 1 type sửa đổi (modifine), được sử dụng để sửa đổi 1 loại đang được đề cặp đến
 VD 
 `string` có thể là tuỳ chọn (hoặc null) , còn `string!` thì được yêu cầu (non-null)
+
 ## 3. List Type 
 List type là một loại khác của type modifier, mọi loại (type) được bao bởi dấu ngoặc vuông "[]" đều có thể trở thành List type - là 1 collection định nghĩa type của mỗi item trong danh sách
-VD, type được định nghĩa [Int] sẽ là 1 collection của Int type, và [String] sẽ là collection của String type. Non-null và List có thể được dùng cùng với nhau để tạo nên 1 laoij dùng cả trong yêu cầu và định nghĩa, VD [String]!
+VD, type được định nghĩa [Int] sẽ là 1 collection của Int type, và [String] sẽ là collection của String type. 
+
+Non-null và List có thể được dùng cùng với nhau để tạo nên 1 loại dùng cả trong `yêu cầu` và `định nghĩa`, VD [String]!
+
 ## 4. Object Type 
-Nếu như GraphQL scalar type mô tả "lá" của cấu trúc GraphQL response, Object type mô tả "nhánh", hầu hết các schema đều là Object 
+Nếu như GraphQL scalar type mô tả "lá" của cấu trúc GraphQL response, Object type mô tả "nhánh", hầu hết các `schema` đều là Object 
 
 Objects bao gồm danh sách các field (key) được đặt tên và value được xử lí 
 
-Được định nghĩa với từ khoá `type`, ít nhất 1 hay nhiều field cần được định nghĩa, và 1 field có thể bắt đầu với 2 dấu gạch dưới "__" để tránh conflic với GraphQL system
+`Được định nghĩa` với từ khoá `type`, ít nhất 1 hay nhiều field cần được định nghĩa, và 1 field có thể bắt đầu với 2 dấu gạch dưới "__" để tránh conflic với GraphQL system
 
-VD: cũng có thể Fighter object để định nghĩa cho các đặc tính trong game
+VD: Dùng Fighter object để định nghĩa cho các đặc tính trong game
 ```swift
 "A hero with direct combat ability and strength."
 type Fighter {
@@ -123,9 +133,9 @@ type Fighter {
 Object có thể được lồng trong 1 field của Object khác 
 
 ## 5. Root Operation Types 
-Có 3 loại Object đặc biệt trong GraphQL schema : Query, Mutation, Subscription (được biết như Root Operator type) và tuân thủ mọi rules như những Object type khác
+Có 3 loại Object đặc biệt trong GraphQL schema : `Query`, `Mutation`, `Subscription` (được biết như Root Operator type) và tuân thủ mọi rules như những Object type khác
 
-Từ khoá schema đại diện cho điểm truy cập vào GraphQL schema. Your root Query, Mutation, Subcription sẽ nằm trong root schema Object
+Từ khoá `schema` đại diện cho điểm truy cập vào GraphQL schema. Root Query, Mutation, Subcription sẽ nằm trong root schema Object
 ```swift
   schema {
   query: Query
@@ -213,4 +223,4 @@ union Character = Wizard | Fighter
 Dấu bằng thể hiện sự định nghĩa, và dấu | thể hiện OR statement. Chú ý, Union phải bao gồm Object hay Interfaces. Scalar type không có giá trị trong Union
 
 Bây giờ nếu như bạn truy vấn list character, nó có thể sử dụng Character Union và trả về Wizard và Fighter type
-#### Kết luận 
+#### Source: [www.digitalocean.com](https://www.digitalocean.com/community/conceptual-articles/understanding-the-graphql-type-system)
