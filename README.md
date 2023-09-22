@@ -3,9 +3,9 @@
 
 GraphQl là 1 diều kiện tốt để giao tiếp giữa FE và BE 
 
-Tất cả chi tiết và khả năng được trình bày trong GraphQL Schema, để viết function về schema bạn cần tìm hiểu về GraphQL Type Schema trước 
+Tất cả chi tiết và khả năng được trình bày trong `GraphQL Schema`, để viết function về schema bạn cần tìm hiểu về GraphQL Type Schema trước 
 
-Trong bài viết này bạn sẽ được biết về GraphQL types: 5 built-in Scalar types, Enums, List and Non-null wrapping types, Object types, abstract Interface & Union types ➡  Build a complete GraphQL schema 
+Trong bài viết này bạn sẽ được biết về GraphQL types: `5 built-in Scalar types`, `Enums`, `List and Non-null wrapping types`, `Object types`, `abstract Interface & Union types` ➡  Build a complete GraphQL schema 
 
 ## Prerequisites - ĐK tiên quyết 
 - Hiểu cơ bản về GraphQL
